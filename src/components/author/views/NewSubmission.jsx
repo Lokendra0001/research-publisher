@@ -158,7 +158,6 @@ const NewSubmission = () => {
         formData,
         { withCredentials: true },
       );
-      console.log(res);
 
       if (res.data.success && constant.PAYMENT_SERVICE == "on") {
         const response = await axios.post(
