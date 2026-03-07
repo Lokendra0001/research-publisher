@@ -371,6 +371,7 @@ const NewSubmission = () => {
                           * Author[{index + 1}] Pin Code
                         </label>
                         <input
+                          type="text"
                           {...register(`coAuthors.${index}.pincode`, {
                             required: "Pincode is required",
                             pattern: {
@@ -378,6 +379,13 @@ const NewSubmission = () => {
                               message: "Only numbers allowed",
                             },
                           })}
+                          maxLength={6}
+                          onInput={(e) => {
+                            e.target.value = e.target.value.replace(
+                              /[^0-9]/g,
+                              "",
+                            );
+                          }}
                           className="w-full rounded border border-border px-2 py-1.5 text-sm"
                         />
                         {errors.coAuthors?.[index]?.pincode && (
