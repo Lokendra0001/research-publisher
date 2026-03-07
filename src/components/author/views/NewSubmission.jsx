@@ -636,20 +636,23 @@ const NewSubmission = () => {
             </div>
 
             {/* Terms */}
-            <div className="flex items-start gap-2 pt-4 border-t">
+            <div className="flex items-center gap-2 pt-4 border-t">
               <input
                 type="checkbox"
+                id="terms"
                 {...register("agreement", { required: true })}
                 className="mt-1 w-4 h-4 text-primary-blue rounded border-border focus:ring-ring"
               />
-              <div className="text-sm text-text-primary/70">
+              <label className="text-sm text-text-primary/70 cursor-pointer select-none " htmlFor="terms">
                 <span className="font-semibold">
                   I agree to the Terms of Services & Privacy Policy.
                 </span>
-                <p className="text-xs mt-1">
-                  Please check over your entries...
+              </label>
+              {errors.agreement && (
+                <p className="text-xs text-danger font-semibold">
+                  ( *Check the terms & condition )
                 </p>
-              </div>
+              )}
             </div>
 
             {/* Submit */}
