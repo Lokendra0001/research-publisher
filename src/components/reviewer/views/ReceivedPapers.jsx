@@ -89,11 +89,11 @@ const ReceivedPapers = () => {
             { paperId: res.data.data.paperId, status: res.data.data.decision },
             { withCredentials: true },
           );
-          notify.success(
-            `Paper ${decision === "accepted" ? "Approved" : decision === "minor_reject" ? "Requested Revision" : "Rejected"} successfully`,
-          );
-          fetchAssignments();
         }
+        notify.success(
+          `Paper ${decision === "accepted" ? "Approved" : decision === "minor_reject" ? "Requested Revision" : "Rejected"} successfully`,
+        );
+        fetchAssignments();
       }
     } catch (error) {
       console.error("Error submitting review:", error);
