@@ -61,7 +61,7 @@ const ReceivedPapers = () => {
             if (res.data.success) {
                 //2. Updating Paper Status
                 const result = await axios.patch(`${constant.SERVER_URL}papers/${res.data.data.paperId}`, { status: res.data.data.decision }, { withCredentials: true });
-                if (result.data.success) {
+            if (result.data.success && constant.NODE_ENV == "development") {
                     //3. Updating Payment RefundAmt, KeptAmt and RefundStatus
                     await axios.patch(`${constant.SERVER_URL}payment/update-status`, { paperId: res.data.data.paperId, status: res.data.data.decision }, { withCredentials: true });
                     notify.success(`Paper ${decision === 'accepted' ? 'Approved' : decision === 'minor_reject' ? 'Requested Revision' : 'Rejected'} successfully`);
