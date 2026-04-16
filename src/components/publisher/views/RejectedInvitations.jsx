@@ -92,7 +92,8 @@ const RejectedInvitations = () => {
 
     const filteredAssignments = assignments.filter(a =>
         a.paper?.title?.toLowerCase().includes(filter.toLowerCase()) ||
-        a.paper?.id?.toLowerCase().includes(filter.toLowerCase())
+        a.paper?.id?.toLowerCase().includes(filter.toLowerCase()) ||
+        a.paper?.customId?.toLowerCase().includes(filter.toLowerCase())
     );
 
 
@@ -170,7 +171,7 @@ const RejectedInvitations = () => {
                                                 {assignment.paper?.title}
                                             </p>
                                             <p className="text-xs text-mono text-text-primary/50">
-                                                ID: {assignment.paper?.id?.slice(0, 8)}...
+                                                ID: {assignment.paper?.customId || assignment.paper?.id?.slice(0, 8)}
                                             </p>
                                         </td>
                                         <td className="px-6 py-4 align-top">

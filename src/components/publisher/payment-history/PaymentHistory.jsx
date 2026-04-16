@@ -88,10 +88,11 @@ const PaymentHistory = () => {
                             <th scope="col" className="px-6 py-3 font-bold w-14">No.</th>
                             <th scope="col" className="px-6 py-3 font-bold min-w-40 lg:min-w-auto">Paper Title</th>
                             <th scope="col" className="px-6 py-3 font-bold min-w-40 lg:min-w-auto">Author Name</th>
-                            <th scope="col" className="px-6 py-3 font-bold ">Amount</th>
-                            <th scope="col" className="px-6 py-3 font-bold  text-center">Mode</th>
-                            <th scope="col" className="px-6 py-3 font-bold  text-center">Status</th>
-                            <th scope="col" className="px-6 py-3 font-bold  text-center">Date</th>
+                            <th scope="col" className="px-6 py-3 font-bold ">Ref ID</th>
+                            <th scope="col" className="px-6 py-3 font-bold text-center">Proof</th>
+                            <th scope="col" className="px-6 py-3 font-bold text-center">Mode</th>
+                            <th scope="col" className="px-6 py-3 font-bold text-center">Status</th>
+                            <th scope="col" className="px-6 py-3 font-bold text-center">Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,6 +114,9 @@ const PaymentHistory = () => {
                                         <div className="h-4 bg-gray-200 rounded w-16"></div>
                                     </td>
                                     <td className="px-6 py-4 text-center">
+                                        <div className="h-8 w-8 bg-gray-200 rounded-full mx-auto"></div>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
                                         <div className="h-6 w-12 bg-gray-200 rounded mx-auto"></div>
                                     </td>
                                     <td className="px-6 py-4 text-center">
@@ -130,27 +134,42 @@ const PaymentHistory = () => {
                                         {index + 1}
                                     </td>
                                     <td className="px-6 py-4 align-middle">
-                                        <p className="text-text-primary font-medium line-clamp-1" title={item.paper?.title}>
-                                            {item.paper?.title || "Unknown Paper"}
+                                        <p className="text-text-primary font-medium line-clamp-1" title={item.paperTitle}>
+                                            {item.paperTitle || "Unknown Paper"}
                                         </p>
                                         <p className="text-xs text-mono text-text-primary/50 mt-1 line-clamp-1">
-                                            ID: {item.paper?.id || "N/A"}
+                                            ID: {item.id || "N/A"}
                                         </p>
                                     </td>
                                     <td className="px-6 py-4 align-middle">
                                         <p className="text-text-primary font-medium">{item?.payerName}</p>
                                         <p className="text-xs text-text-primary/50">{item?.payerEmail}</p>
                                     </td>
-                                    <td className="px-6 py-4 font-medium text-text-primary align-middle whitespace-nowrap">
-                                        {item.currency == "INR" ? "₹" : item.currency} {item?.amount?.toFixed(2)}
+                                    <td className="px-6 py-4 font-mono text-[10px] text-text-primary align-middle whitespace-nowrap opacity-60">
+                                        {item.transactionId || "N/A"}
                                     </td>
                                     <td className="px-6 py-4 text-center align-middle">
-                                        <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                                        {item.screenshotUrl ? (
+                                            <a
+                                                href={item.screenshotUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-success/10 text-success hover:bg-success/20 transition-colors border border-success/20"
+                                                title="View Payment Proof"
+                                            >
+                                                <Eye className="w-4 h-4" />
+                                            </a>
+                                        ) : (
+                                            <span className="text-text-primary/20">-</span>
+                                        )}
+                                    </td>
+                                    <td className="px-6 py-4 text-center align-middle">
+                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tight border ${item.payuMode === 'Manual' ? 'bg-orange-50 text-orange-600 border-orange-200' : 'bg-blue-50 text-blue-600 border-blue-200'}`}>
                                             {item?.payuMode || "Online"}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-center align-middle">
-                                        <span className={`bg-success/10 text-success border border-success/50 px-2 py-1 rounded-full text-xs font-medium   capitalize`}>
+                                        <span className={`bg-success/10 text-success border border-success/50 px-2 py-1 rounded-full text-xs font-medium  capitalize`}>
                                             {item.status}
                                         </span>
                                     </td>

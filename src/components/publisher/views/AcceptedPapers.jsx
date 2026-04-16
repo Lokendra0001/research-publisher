@@ -98,7 +98,8 @@ const AcceptedPapers = () => {
                             <th scope="col" className="px-6 py-3 font-bold min-w-[200px]">Paper Title</th>
                             <th scope="col" className="px-6 py-3 font-bold w-50 whitespace-nowrap">Reviewed By</th>
                             <th scope="col" className="px-6 py-3 font-bold w-16 text-center">Paper</th>
-                            <th scope="col" className="px-6 py-3 font-bold w-16 text-center">View More</th>
+                            <th scope="col" className="px-6 py-3 font-bold w-16 text-center whitespace-nowrap">Payment Ref</th>
+                            <th scope="col" className="px-6 py-3 font-bold w-16 text-center">Payment</th>
                             <th scope="col" className="px-6 py-3 font-bold w-28 text-center">Publish</th>
                         </tr>
                     </thead>
@@ -107,8 +108,8 @@ const AcceptedPapers = () => {
                         <tbody>
                             {[1, 2, 3].map((i) => (
                                 <tr key={i} className="animate-pulse border-b border-border/50">
-                                    <td className="px-6 py-4 w-12">
-                                        <div className="h-4 bg-border rounded w-8"></div>
+                                    <td className="px-6 py-4 w-12 text-center">
+                                        <div className="h-4 bg-border rounded w-8 mx-auto"></div>
                                     </td>
                                     <td className="px-6 py-4 min-w-[200px]">
                                         <div className="h-4 bg-border rounded w-48 mb-2"></div>
@@ -116,29 +117,14 @@ const AcceptedPapers = () => {
                                     <td className="px-6 py-4 w-40 whitespace-nowrap">
                                         <div className="h-4 bg-border rounded w-32"></div>
                                     </td>
-                                    <td className="px-6 py-4 w-40 whitespace-nowrap">
-                                        <div className="h-4 bg-border rounded w-28"></div>
-                                    </td>
                                     <td className="px-6 py-4 w-16 text-center">
                                         <div className="h-8 w-8 bg-border rounded-full mx-auto"></div>
                                     </td>
-                                    <td className="px-6 py-4 w-32 text-center">
-                                        <div className="h-6 bg-border rounded w-20 mx-auto"></div>
-                                    </td>
-                                    <td className="px-6 py-4 w-40 whitespace-nowrap">
-                                        <div className="h-4 bg-border rounded w-28"></div>
-                                    </td>
-                                    <td className="px-6 py-4 w-32 text-center whitespace-nowrap">
+                                    <td className="px-6 py-4 w-16 text-center">
                                         <div className="h-4 bg-border rounded w-16 mx-auto"></div>
                                     </td>
-                                    <td className="px-6 py-4 w-40 text-center whitespace-nowrap">
-                                        <div className="h-4 bg-border rounded w-28 mx-auto"></div>
-                                    </td>
-                                    <td className="px-6 py-4 w-28 text-center">
-                                        <div className="h-6 bg-border rounded w-20 mx-auto"></div>
-                                    </td>
-                                    <td className="px-6 py-4 w-28 text-center">
-                                        <div className="h-6 bg-border rounded w-20 mx-auto"></div>
+                                    <td className="px-6 py-4 w-16 text-center">
+                                        <div className="h-8 w-8 bg-border rounded-full mx-auto"></div>
                                     </td>
                                     <td className="px-6 py-4 w-28 text-center">
                                         <div className="h-6 bg-border rounded w-20 mx-auto"></div>
@@ -155,7 +141,7 @@ const AcceptedPapers = () => {
                             <tbody>
                                 {filteredAssignments.map((item, index) => (
                                     <tr key={item.id} className="bg-primary-foreground border-b border-border/50 hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 w-12 font-medium text-text-primary align-middle">
+                                        <td className="px-6 py-4 w-12 font-medium text-text-primary align-middle text-center">
                                             {index + 1}
                                         </td>
                                         <td className="px-6 py-4 min-w-[200px] font-medium text-text-primary align-middle text-sm">
@@ -181,20 +167,34 @@ const AcceptedPapers = () => {
                                             )}
                                         </td>
 
-                                        <td className="px-6 py-4 w-28 text-center align-middle">
-                                            <Link
-                                                href={`/view_more_action?id=${item.paper.id}`}
-                                                target='_blank'
-                                                className="text-secondary/90 hover:text-secondary font-medium text-xs border border-secondary/60 px-3 py-1 rounded hover:bg-secondary/10 transition-colors whitespace-nowrap">
-                                                View more
-                                            </Link>
+                                        <td className="px-6 py-4 w-16 text-center align-middle whitespace-nowrap font-mono text-xs opacity-70">
+                                            {item.paper?.paymentTransactionId || "N/A"}
+                                        </td>
+
+                                        <td className="px-6 py-4 w-16 text-center align-middle">
+                                            {item.paper?.paymentScreenshotUrl ? (
+                                                <a
+                                                    href={item.paper.paymentScreenshotUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-success/10 text-success hover:bg-success/20 transition-colors border border-success/20"
+                                                    title="View Payment Screenshot"
+                                                >
+                                                    <Upload className="w-4 h-4" />
+                                                </a>
+                                            ) : (
+                                                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-danger/5 text-danger/40" title="No payment uploaded">
+                                                    <Upload className="w-4 h-4" />
+                                                </span>
+                                            )}
                                         </td>
 
                                         <td className="px-6 py-4 w-28 text-center align-middle">
                                             <button
                                                 onClick={() => handlePublish(item.id, item.paper?.id)}
                                                 disabled={!!publishing[item.id]}
-                                                className="text-primary-foreground bg-secondary hover:bg-secondary/90 font-medium text-xs px-3 py-1 rounded shadow-sm transition-colors flex items-center justify-center gap-1 mx-auto whitespace-nowrap disabled:bg-secondary/50 disabled:cursor-not-allowed"
+                                                className={`text-primary-foreground font-medium text-xs px-3 py-1 rounded shadow-sm transition-colors flex items-center justify-center gap-1 mx-auto whitespace-nowrap disabled:cursor-not-allowed
+                                                    ${item.paper?.paymentScreenshotUrl ? 'bg-secondary hover:bg-secondary/90' : 'bg-gray-400 cursor-not-allowed opacity-60'}`}
                                             >
                                                 {publishing[item.id] ? (
                                                     <>

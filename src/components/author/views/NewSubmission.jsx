@@ -169,7 +169,8 @@ const NewSubmission = () => {
         document.write(response.data);
         document.close();
       } else if (res.data.success && constant.PAYMENT_SERVICE == "off") {
-        router.push("/author/role?page=submitted_papers");
+        router.push(`/author/role?page=payment_service&id=${res.data.data.id}`);
+        // router.push("/author/role?page=submitted_papers");
       } else {
         notify.error(res.data.message || "Submission failed");
       }
@@ -526,9 +527,7 @@ const NewSubmission = () => {
                       className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-warning/80  file:text-text-primary hover:file:bg-warning"
                     />
                   </div>
-                  <p className="text-xs font-bold text-danger mt-1">
-                    (*Word File Only)
-                  </p>
+                
                 </div>
               </div>
             </div>
@@ -643,7 +642,10 @@ const NewSubmission = () => {
                 {...register("agreement", { required: true })}
                 className="mt-1 w-4 h-4 text-primary-blue rounded border-border focus:ring-ring"
               />
-              <label className="text-sm text-text-primary/70 cursor-pointer select-none " htmlFor="terms">
+              <label
+                className="text-sm text-text-primary/70 cursor-pointer select-none "
+                htmlFor="terms"
+              >
                 <span className="font-semibold">
                   I agree to the Terms of Services & Privacy Policy.
                 </span>
