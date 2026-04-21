@@ -24,10 +24,13 @@ const ReceivedPapers = () => {
       setLoading(true);
       // Fetch papers that are accepted by reviewer but decision is pending (null)
       const res = await axios.get(
-        `${constant.SERVER_URL}reviews/assignments?status=accepted&decision=pending`,
+        `${constant.SERVER_URL}reviews/assignments?status=accepted&decision=pending&isReview=true`,
         { withCredentials: true },
       );
+      console.log(res)
+
       if (res.data.success) {
+        
         setAssignments(res.data.data);
       }
     } catch (error) {

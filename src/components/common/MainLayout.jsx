@@ -10,7 +10,8 @@ export default function MainLayout({ children }) {
         pathname?.startsWith("/author") ||
         pathname?.startsWith("/publisher") ||
         pathname?.startsWith("/reviewer") ||
-        pathname?.startsWith("/view_more_action")
+        pathname?.startsWith("/view_more_action") ||
+        pathname?.startsWith("/temp")
         ;
 
     if (isRolePage) {

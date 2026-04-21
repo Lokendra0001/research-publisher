@@ -30,7 +30,7 @@ export default function Sidebar() {
                     Impact Factor
                 </div>
                 <div className="p-8 text-center">
-                    <span className="text-4xl font-black text-text-primary/80">0</span>
+                    <span className="text-[12px] font-black text-text-primary/80">"Impact Factor : Under Process"</span>
                 </div>
             </div>
 
