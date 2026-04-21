@@ -6,6 +6,7 @@ import React from 'react'
 
 import CorrectionPolicy from '@/components/guest/guidelines/CorrectionPolicy';
 import PlagiarismPolicy from '@/components/guest/guidelines/PlagiarismPolicy';
+import PublicationCharges from '@/components/guest/guidelines/PublicationCharges';
 
 const Page = () => {
     const params = useParams();
@@ -15,7 +16,8 @@ const Page = () => {
         "author": <AuthorGuidelines />,
         "research-area": <ResearchArea />,
         "correction-policy": <CorrectionPolicy />,
-        "plagiarism-policy": <PlagiarismPolicy />
+        "plagiarism-policy": <PlagiarismPolicy />,
+        "publication-charges": <PublicationCharges />,
     }
 
     return guidelines[guideline];
