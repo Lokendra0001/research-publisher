@@ -36,6 +36,7 @@ const UsersPage = ({ role }) => {
             { label: 'No.', className: 'w-12' },
             { label: 'Editor Name' },
             { label: 'Email' },
+            { label: 'Designation' },
             { label: 'Editor Role', className: 'min-w-40' },
             { label: 'Edit' },
             { label: 'Actions', className: 'text-center w-24' },
@@ -183,6 +184,7 @@ const UsersPage = ({ role }) => {
                                             <td className="px-6 py-4 font-medium text-text-primary ">{index + 1}</td>
                                             <td className="px-6 py-4 font-medium text-text-primary min-w-40 lg:min-w-auto">{user.name}</td>
                                             <td className="px-6 py-4">{user.email}</td>
+                                            {isEditor && <td className="px-6 py-4">{user.designation || '-'}</td>}
                                             <td className="px-6 py-4">{isEditor ? user.editorRole : user.institution || '-'}</td>
                                             <td className="px-6 py-4">{isEditor ?
                                                 <Link

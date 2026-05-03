@@ -1,65 +1,68 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import Sidebar from '../../common/Sidebar';
-import { notify } from '@/utils/toast';
-import axios from 'axios';
-import { constant } from '@/utils/constant';
-import ReviewerCard from './ReviewerCard';
+"use client";
+import React, { useEffect, useState } from "react";
+import Sidebar from "../../common/Sidebar";
+import { notify } from "@/utils/toast";
+import axios from "axios";
+import { constant } from "@/utils/constant";
+import ReviewerCard from "./ReviewerCard";
 
-
-import ReviewerSkeleton from '../../common/ReviewerSkeleton';
+import ReviewerSkeleton from "../../common/ReviewerSkeleton";
 
 const AllReviewer = () => {
+  const [reviewers, setReviewers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-
-    const [reviewers, setReviewers] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchReviewers = async () => {
-            try {
-                setLoading(true);
-                const res = await axios.get(`${constant.SERVER_URL}public/allReviewers`);
-                if (res.data.status) {
-                    setReviewers(res.data.reviewers)
-                } else {
-                    notify.error(res.data.message)
-                }
-            } catch (error) {
-                notify.error(error.message)
-            } finally {
-                setLoading(false);
-            }
+  useEffect(() => {
+    const fetchReviewers = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${constant.SERVER_URL}public/allReviewers`,
+        );
+        if (res.data.status) {
+          setReviewers(res.data.reviewers);
+        } else {
+          notify.error(res.data.message);
         }
+      } catch (error) {
+        notify.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        fetchReviewers();
-    }, [])
+    fetchReviewers();
+  }, []);
 
+  if (reviewers.length == 0 && !loading)
     return (
-        <div className="bg-white py-10 min-h-screen">
-            <div className="">
-
-                {/* Main Content Area (3 Cols) */}
-                <div className="">
-                    <h2 className="text-2xl font-bold text-(--primary) border-b-2 border-orange-200 pb-2 mb-6">
-                        Reviewers
-                    </h2>
-
-                    {loading ? (
-                        <ReviewerSkeleton count={4} />
-                    ) : (
-                        <div className="space-y-4">
-                            {reviewers.map((reviewer, index) => (
-                                <ReviewerCard key={index} reviewer={reviewer} />
-                            ))}
-                        </div>
-                    )}
-                </div>
-
-
-            </div>
-        </div>
+      <div className="bg-white py-10 min-h-screen flex items-center justify-center">
+        <p className="text-center ">No Reviewers Found</p>
+      </div>
     );
+
+  return (
+    <div className="bg-white py-10 min-h-screen">
+      <div className="">
+        {/* Main Content Area (3 Cols) */}
+        <div className="">
+          <h2 className="text-2xl font-bold text-(--primary) border-b-2 border-orange-200 pb-2 mb-6">
+            Reviewers
+          </h2>
+
+          {loading ? (
+            <ReviewerSkeleton count={4} />
+          ) : (
+            <div className="space-y-4">
+              {reviewers.map((reviewer, index) => (
+                <ReviewerCard key={index} reviewer={reviewer} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AllReviewer;

@@ -6,6 +6,12 @@ const EditorCard = ({ editor }) => (
             {editor.role && editor.role !== 'editor' && <span className="text-sm font-normal text-text-primary ml-2">({editor.role})</span>}
         </h3>
         <div className="space-y-3 text-sm text-text-primary font-semibold">
+            {editor.designation && (
+                <div className="md:flex ">
+                    <span className="font-bold w-40 shrink-0">Designation</span>
+                    <span className="break-words">: {editor.designation}</span>
+                </div>
+            )}
             {editor.address && (
                 <div className="md:flex ">
                     <span className="font-bold w-40 shrink-0">Address</span>

@@ -8,7 +8,7 @@ import ReviewerSkeleton from '../../common/ReviewerSkeleton';
 
 const AllEditors = () => {
     const [editors, setEditors] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);  
 
     useEffect(() => {
         const fetchEditors = async () => {

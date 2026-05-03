@@ -13,15 +13,27 @@ export default function Sidebar() {
           <ul className="space-y-2">
             <li>
               <a
-                href="#"
+                href="https://ijarmy.com/signin"
                 className="text-primary-blue font-medium hover:underline break-all text-sm"
               >
-                https://fe.onegred.com/signin
+                https://ijarmy.com/signin
               </a>
             </li>
-            <li className="text-sm text-text-primary/80 border-t pt-2 mt-2">
+            {/* <li className="text-sm text-text-primary/80 border-t pt-2 mt-2">
               New issue released! Submit your paper for the upcoming quarterly
               edition.
+            </li> */}
+            <li className="border-t border-dashed pt-2 mt-2">
+              <p className="text-sm font-semibold text-primary ">
+                ISSN verification Link :
+              </p>
+              <a
+                target="_blank"
+                href="https://nsl.niscpr.res.in/ISSNPROCESS/issnassignedinfo.jsp"
+                className="text-primary-blue font-medium hover:underline break-all text-sm"
+              >
+                https://nsl.niscpr.res.in/ISSNPROCESS/issnassignedinfo.jsp
+              </a>
             </li>
           </ul>
         </div>
@@ -52,13 +64,14 @@ export default function Sidebar() {
             <FileText className="w-4 h-4 text-(--primary)" />
             Copyright Form
           </Link>
-          <Link
-            href="#"
-            className="flex items-center gap-2 px-4 py-3 text-gray-700 hover:bg-gray-50 font-medium"
+          <a
+            href="/assets/paper-template.docx"
+            download="paper-template.docx"
+            className="flex items-center gap-2 px-4 py-3 text-gray-700 hover:bg-gray-50 font-medium cursor-pointer w-full"
           >
-            <Download className="w-4 h-4 text-(--primary)" />
+            <Download className="w-4 h-4 text-primary" />
             Paper Template
-          </Link>
+          </a>
         </div>
       </div>
     </div>
