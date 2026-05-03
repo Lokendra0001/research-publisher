@@ -1,4 +1,4 @@
-# IJARMY Frontend: Academic Publishing User Interface
+# IJARMY Frontend: Academic Publishing User Interface 
 
 The IJARMY Frontend is a high-performance, responsive Single Page Application (SPA) built with **Next.js 14**. It is designed to provide a seamless and intuitive experience for authors, researchers, peer-reviewers, and journal publishers.
 
